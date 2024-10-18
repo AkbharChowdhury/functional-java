@@ -1,0 +1,6 @@
+type,make,model,engineCapacity
+sedan,BMW,530,1998
+sedan,AUDI,A5,1998
+sedan,Mercedes,E-CLass,2500
+hatchback,Skoda,Octavia,1600
+hatchback,Toyota,TypeR,1450
