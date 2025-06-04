@@ -5,15 +5,25 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.toMap;
 
 public class Functional {
     public static void main(String[] args) throws IOException {
         var cars = getCarCSVData();
         System.out.println("All cars");
-        System.out.println(cars.stream().filter(car -> car.type().equalsIgnoreCase("Hatchback")).toList());
-        var carMakeModelList = cars.stream().flatMap(car -> Stream.of(car.make(), car.model())).toList();
-        System.out.println(carMakeModelList);
+        System.out.println(cars);
+//        System.out.println(cars.stream().filter(car -> car.type().equalsIgnoreCase("Hatchback")).toList());
+//        var carMakeModelList = cars.stream().flatMap(car -> Stream.of(car.make(), car.model())).toList();
+//        System.out.println(carMakeModelList);
+        Map<String, Map<String, Integer>> groupedCars = cars.stream().collect(
+                groupingBy(Car::type, toMap(Car::make, Car::engineCapacity))
+        );
+        System.out.println("Grouped cars: " + groupedCars);
+//        System.out.println(groupedCars.get("hatchback"));
 
     }
 
